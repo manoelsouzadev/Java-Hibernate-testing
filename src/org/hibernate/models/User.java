@@ -1,5 +1,7 @@
 package org.hibernate.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="users")
-public class User {
+public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -18,6 +20,10 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	public User() {
+		
+	}
 	
 	public User(String name, String password) {
 		this.name = name;
@@ -41,5 +47,10 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User \nId:" + id + " \nname:" + name + " \npassword:" + password + "\n";
 	}
 }
